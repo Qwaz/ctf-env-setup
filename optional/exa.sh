@@ -3,7 +3,7 @@ EXA_ZIP_NAME=exa-linux-x86_64-${EXA_VERSION}.zip
 wget https://github.com/ogham/exa/releases/download/v${EXA_VERSION}/${EXA_ZIP_NAME}
 unzip ${EXA_ZIP_NAME}
 rm ${EXA_ZIP_NAME}
-mv exa-linux-x86_64 $HOME/.local/bin/exa
+mv exa-linux-x86_64 $LOCAL_BIN/exa
 
 RC=$RC'
 alias ls=exa

@@ -4,10 +4,11 @@ set -ex
 INSTALL="sudo apt -yq install"
 RC='export LC_CTYPE=en_US.UTF-8
 test -z "$TMUX" && export TERM="xterm-256color"'
+LOCAL_BIN="$HOME/.local/bin"
 
 source versions.sh
 source options.sh
-mkdir -p .local/bin
+mkdir -p $LOCAL_BIN
 
 
 # add 32-bit support
@@ -30,12 +31,13 @@ source $HOME/.venv/hack/bin/activate'
 
 source $HOME/.venv/hack/bin/activate
 pip install pwntools pycryptodome
+cp pwntools-terminal $LOCAL_BIN
 deactivate
 
 
 # install pwndbg
 git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
-pushd
+pushd $PWD
 cd $HOME/.pwndbg
 ./setup.sh
 popd
