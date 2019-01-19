@@ -52,8 +52,12 @@ $str"
 
 source $HOME/.venv/hack/bin/activate
 pip install pwntools pycryptodome
-cp pwntools-terminal $LOCAL_BIN
 deactivate
+
+
+# copy scripts
+cp pwntools-terminal $LOCAL_BIN
+cp .tmux.conf $HOME
 
 
 # install pwndbg
