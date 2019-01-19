@@ -5,7 +5,7 @@ CTF enviroment setup script for Ubuntu
 ## Installation
 
 ```
-clone https://github.com/Qwaz/ctf-env-setup.git
+git clone https://github.com/Qwaz/ctf-env-setup.git
 cd ctf-env-setup
 # edit options.sh to adjust optional features
 ./setup.sh
