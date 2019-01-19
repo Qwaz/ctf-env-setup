@@ -5,8 +5,9 @@ unzip ${EXA_ZIP_NAME}
 rm ${EXA_ZIP_NAME}
 mv exa-linux-x86_64 $LOCAL_BIN/exa
 
-RC=$RC'
-alias ls=exa
+str='alias ls=exa
 alias la="exa -a"
 alias ll="exa -al"
 alias lr="exa -lT"'
+RC="$RC
+$str"

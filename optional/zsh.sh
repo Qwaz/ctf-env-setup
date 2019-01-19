@@ -15,10 +15,11 @@ zsh-users/zsh-history-substring-search
 mafredri/zsh-async
 sindresorhus/pure' > $HOME/.zsh_plugins
 
-$RC=$RC'
-source <(antibody init)
+str='source <(antibody init)
 antibody bundle < ~/.zsh_plugins
 
 zstyle ":completion:*" menu select'
+RC="$RC
+$str"
 
 chsh -s $(which zsh)

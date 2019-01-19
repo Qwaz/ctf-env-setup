@@ -26,8 +26,9 @@ sudo apt -yq install virtualenv
 mkdir $HOME/.venv
 virtualenv $HOME/.venv/hack
 
-RC=$RC'
-source $HOME/.venv/hack/bin/activate'
+str='source $HOME/.venv/hack/bin/activate'
+RC="$RC
+$str"
 
 source $HOME/.venv/hack/bin/activate
 pip install pwntools pycryptodome
