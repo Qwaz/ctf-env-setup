@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 INSTALL="sudo apt -yq install"
 RC='export LC_CTYPE=en_US.UTF-8
