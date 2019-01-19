@@ -73,4 +73,4 @@ test "$EXA" -eq 1 && source optional/exa.sh
 
 # Updating RC
 echo "$RC" >> $HOME/.bashrc
-test "$ZSH" -eq 1 && echo "$ZSH_RC$RC" >> $HOME/.zshrc
+test "$ZSH" -eq 1 && echo "$RC$ZSH_RC" >> $HOME/.zshrc

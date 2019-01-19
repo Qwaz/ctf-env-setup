@@ -18,7 +18,6 @@ sindresorhus/pure' > $HOME/.zsh_plugins
 ZSH_RC='source <(antibody init)
 antibody bundle < ~/.zsh_plugins
 zstyle ":completion:*" menu select
-
 '
 
 sudo sed -ri "s#^($USER:[^s]+)/bin/bash#\1$(which zsh)#g" /etc/passwd
