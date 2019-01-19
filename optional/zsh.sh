@@ -15,11 +15,10 @@ zsh-users/zsh-history-substring-search
 mafredri/zsh-async
 sindresorhus/pure' > $HOME/.zsh_plugins
 
-str='source <(antibody init)
+ZSH_RC='source <(antibody init)
 antibody bundle < ~/.zsh_plugins
+zstyle ":completion:*" menu select
 
-zstyle ":completion:*" menu select'
-RC="$RC
-$str"
+'
 
-chsh -s $(which zsh)
+sudo sed -ri "s#^($USER:[^s]+)/bin/bash#\1$(which zsh)#g" /etc/passwd

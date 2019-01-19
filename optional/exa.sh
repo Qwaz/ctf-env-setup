@@ -8,6 +8,7 @@ mv exa-linux-x86_64 $LOCAL_BIN/exa
 str='alias ls=exa
 alias la="exa -a"
 alias ll="exa -al"
-alias lr="exa -lT"'
+alias lr="exa -lT"
+'
 RC="$RC
 $str"
