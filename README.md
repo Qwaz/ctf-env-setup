@@ -13,7 +13,13 @@ cd ctf-env-setup
 
 ## Included
 
-- virtualenv with pwntools
-- pwndbg
-- (optoinal) zsh with pure theme
-- (optional) bat and exa aliasing
+- [pwndbg](https://github.com/pwndbg/pwndbg)
+- [pwntools](https://github.com/Gallopsled/pwntools)
+- tmux configuration for pwntools
+
+### Optional Features
+
+- [qemu-user-static](https://wiki.debian.org/QemuUserEmulation) for multi-arch support
+- zsh with [pure theme](https://github.com/sindresorhus/pure)
+- `cat` replacement with [`bat`](https://github.com/sharkdp/bat)
+- `ls` replacement with [`exa`](https://github.com/ogham/exa)

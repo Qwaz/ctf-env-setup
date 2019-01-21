@@ -73,8 +73,12 @@ test "$SSHD" -eq 1 && source optional/sshd.sh
 test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$BAT" -eq 1 && source optional/bat.sh
 test "$EXA" -eq 1 && source optional/exa.sh
+test "$QEMU" -eq 1 && source optional/qemu.sh
 
 
 # Updating RC
-echo "$RC" >> $HOME/.bashrc
-test "$ZSH" -eq 1 && echo "$RC$ZSH_RC" >> $HOME/.zshrc
+if [[ "$ZSH" -eq 1 ]]; then
+    echo "$RC" >> $HOME/.zshrc
+else
+    echo "$RC" >> $HOME/.bashrc
+fi

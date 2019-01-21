@@ -2,3 +2,4 @@ SSHD=1
 ZSH=1
 BAT=1
 EXA=1
+QEMU=1
