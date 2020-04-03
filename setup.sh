@@ -1,7 +1,12 @@
 #!/bin/bash
 set -ex
 
-INSTALL="sudo apt -yq install"
+SUDO=''
+if (( $EUID != 0 )); then
+    SUDO='sudo'
+fi
+
+INSTALL="$SUDO apt -yq install"
 RC='export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
 ulimit -c unlimited
@@ -18,32 +23,34 @@ mkdir -p $LOCAL_BIN
 
 
 # add 32-bit support
-sudo dpkg --add-architecture i386
+$SUDO dpkg --add-architecture i386
 
 
 # install packages
-sudo apt -yq update && sudo apt -yq upgrade
-$INSTALL build-essential python-dev libc6-dbg libgmp3-dev unzip
-$INSTALL libc6-dbg:i386 libncurses5:i386 libstdc++6:i386
+$SUDO apt -yq update && $SUDO apt -yq upgrade
+$INSTALL git wget unzip
+$INSTALL build-essential python3-dev python3-venv libc6-dbg
+$INSTALL libc6-dbg:i386
 
 
-# kernel related setting
-SYSCTL_CONF=/etc/sysctl.conf
-PTRACE_CONF=/etc/sysctl.d/10-ptrace.conf
+if [ $KERNEL_OPT -eq 1 ]; then
+    # kernel related setting
+    SYSCTL_CONF=/etc/sysctl.conf
+    PTRACE_CONF=/etc/sysctl.d/10-ptrace.conf
 
-echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-sudo sed -i '/^kernel.yama.ptrace_scope/ d' $PTRACE_CONF
-echo 'kernel.yama.ptrace_scope = 0' | sudo tee -a $PTRACE_CONF
+    echo 0 | $SUDO tee /proc/sys/kernel/yama/ptrace_scope
+    $SUDO sed -i '/^kernel.yama.ptrace_scope/ d' $PTRACE_CONF
+    echo 'kernel.yama.ptrace_scope = 0' | $SUDO tee -a $PTRACE_CONF
 
-echo "core-%e.%p" | sudo tee /proc/sys/kernel/core_pattern
-sudo sed -i '/^kernel.core_pattern/ d' $SYSCTL_CONF
-echo 'kernel.core_pattern = core-%e.%p' | sudo tee -a $SYSCTL_CONF
+    echo "core-%e.%p" | $SUDO tee /proc/sys/kernel/core_pattern
+    $SUDO sed -i '/^kernel.core_pattern/ d' $SYSCTL_CONF
+    echo 'kernel.core_pattern = core-%e.%p' | $SUDO tee -a $SYSCTL_CONF
+fi
 
 
 # Python environment setup
-sudo apt -yq install virtualenv
 mkdir $HOME/.venv
-virtualenv $HOME/.venv/hack
+python3 -m venv $HOME/.venv/hack
 
 str='source $HOME/.venv/hack/bin/activate
 '
@@ -51,6 +58,7 @@ RC="$RC
 $str"
 
 source $HOME/.venv/hack/bin/activate
+pip install --upgrade pip
 pip install pwntools pycryptodome
 deactivate
 
@@ -60,16 +68,17 @@ cp pwntools-terminal $LOCAL_BIN
 cp .tmux.conf $HOME
 
 
-# install pwndbg
-git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
-pushd $PWD
-cd $HOME/.pwndbg
-./setup.sh
-popd
+if [ $KERNEL_OPT -eq 1 ]; then
+    # install pwndbg
+    git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
+    pushd $PWD
+    cd $HOME/.pwndbg
+    ./setup.sh
+    popd
+fi
 
 
 # optional feature installation
-test "$SSHD" -eq 1 && source optional/sshd.sh
 test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$BAT" -eq 1 && source optional/bat.sh
 test "$EXA" -eq 1 && source optional/exa.sh
