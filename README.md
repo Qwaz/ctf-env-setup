@@ -13,13 +13,14 @@ cd ctf-env-setup
 
 ## Included
 
-- [pwndbg](https://github.com/pwndbg/pwndbg)
-- [pwntools](https://github.com/Gallopsled/pwntools)
-- tmux configuration for pwntools
+- Python venv setup with [pwntools](https://github.com/Gallopsled/pwntools)
 
 ### Optional Features
 
+- [pwndbg](https://github.com/pwndbg/pwndbg)
 - [qemu-user-static](https://wiki.debian.org/QemuUserEmulation) for multi-arch support
 - zsh with [pure theme](https://github.com/sindresorhus/pure)
-- `cat` replacement with [`bat`](https://github.com/sharkdp/bat)
-- `ls` replacement with [`exa`](https://github.com/ogham/exa)
+- [Rust](https://www.rust-lang.org/)
+    - `cat` replacement with [`bat`](https://github.com/sharkdp/bat)
+    - `ls` replacement with [`exa`](https://github.com/ogham/exa)
+- [tmux](https://github.com/tmux/tmux) with [Dracula Theme](https://draculatheme.com/tmux)
