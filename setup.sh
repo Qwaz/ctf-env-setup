@@ -60,9 +60,11 @@ fi
 
 
 # optional feature installation
+test "$QEMU" -eq 1 && source optional/qemu.sh
+
 test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$RUST" -eq 1 && source optional/rust.sh
-test "$QEMU" -eq 1 && source optional/qemu.sh
+test "$TMUX" -eq 1 && source optional/tmux.sh
 
 
 # Python environment setup
@@ -86,8 +88,23 @@ RC="PATH=$RC_PATH:\$PATH
 $RC"
 
 # Updating RC
-if [[ "$ZSH" -eq 1 ]]; then
-    echo "$RC" >> $HOME/.zshrc
+if [[ "$UPDATE_RC" -eq 1 ]]; then
+    if [[ "$ZSH" -eq 1 ]]; then
+        echo "$RC" >> $HOME/.zshrc
+    else
+        echo "$RC" >> $HOME/.bashrc
+    fi
 else
-    echo "$RC" >> $HOME/.bashrc
+    echo "RC was not added"
+    echo "$RC"
 fi
+
+# P.S.
+
+# Install fzf manually if you want
+# fzf: https://github.com/junegunn/fzf
+
+# type this in terminal if tmux is already running
+# tmux source ~/.tmux.conf
+
+# Use the tpm install command: prefix + I (default prefix is ctrl+b)
