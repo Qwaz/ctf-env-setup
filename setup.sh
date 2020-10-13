@@ -7,15 +7,12 @@ if (( $EUID != 0 )); then
 fi
 
 INSTALL="$SUDO apt -yq install"
+
+RC_PATH="\$HOME/.local/bin"
 RC='export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
 ulimit -c unlimited
 '
-
-LOCAL_BIN="$HOME/.local/bin"
-RC="PATH=$LOCAL_BIN:\$PATH
-
-$RC"
 
 source versions.sh
 source options.sh
@@ -28,7 +25,7 @@ $SUDO dpkg --add-architecture i386
 
 # install packages
 $SUDO apt -yq update && $SUDO apt -yq upgrade
-$INSTALL git wget unzip
+$INSTALL git wget unzip curl
 $INSTALL build-essential python3-dev python3-venv libc6-dbg
 $INSTALL libc6-dbg:i386
 
@@ -48,6 +45,26 @@ if [ $KERNEL_OPT -eq 1 ]; then
 fi
 
 
+# copy scripts
+cp pwntools-terminal $LOCAL_BIN
+
+
+if [ $PWNDBG -eq 1 ]; then
+    # install pwndbg
+    git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
+    pushd $PWD
+    cd $HOME/.pwndbg
+    ./setup.sh
+    popd
+fi
+
+
+# optional feature installation
+test "$ZSH" -eq 1 && source optional/zsh.sh
+test "$RUST" -eq 1 && source optional/rust.sh
+test "$QEMU" -eq 1 && source optional/qemu.sh
+
+
 # Python environment setup
 mkdir $HOME/.venv
 python3 -m venv $HOME/.venv/hack
@@ -62,28 +79,11 @@ pip install --upgrade pip
 pip install pwntools pycryptodome
 deactivate
 
+# Update PATH variable
+LOCAL_BIN=
+RC="PATH=$RC_PATH:\$PATH
 
-# copy scripts
-cp pwntools-terminal $LOCAL_BIN
-cp .tmux.conf $HOME
-
-
-if [ $KERNEL_OPT -eq 1 ]; then
-    # install pwndbg
-    git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
-    pushd $PWD
-    cd $HOME/.pwndbg
-    ./setup.sh
-    popd
-fi
-
-
-# optional feature installation
-test "$ZSH" -eq 1 && source optional/zsh.sh
-test "$BAT" -eq 1 && source optional/bat.sh
-test "$EXA" -eq 1 && source optional/exa.sh
-test "$QEMU" -eq 1 && source optional/qemu.sh
-
+$RC"
 
 # Updating RC
 if [[ "$ZSH" -eq 1 ]]; then
