@@ -8,6 +8,7 @@ fi
 
 INSTALL="$SUDO apt -yq install"
 
+LOCAL_BIN="$HOME/.local/bin"
 RC_PATH="\$HOME/.local/bin"
 RC='export LC_CTYPE=en_US.UTF-8
 export TERM="xterm-256color"
@@ -68,21 +69,22 @@ test "$TMUX" -eq 1 && source optional/tmux.sh
 
 
 # Python environment setup
-mkdir $HOME/.venv
-python3 -m venv $HOME/.venv/hack
+if [[ ! -d "$HOME/.venv" ]]; then
+    mkdir $HOME/.venv
+    python3 -m venv $HOME/.venv/hack
 
-str='source $HOME/.venv/hack/bin/activate
+    source $HOME/.venv/hack/bin/activate
+    pip install --upgrade pip
+    pip install pwntools pycryptodome
+    deactivate
+fi
+
+str='VIRTUAL_ENV_DISABLE_PROMPT=true source $HOME/.venv/hack/bin/activate
 '
 RC="$RC
 $str"
 
-source $HOME/.venv/hack/bin/activate
-pip install --upgrade pip
-pip install pwntools pycryptodome
-deactivate
-
 # Update PATH variable
-LOCAL_BIN=
 RC="PATH=$RC_PATH:\$PATH
 
 $RC"
@@ -95,6 +97,7 @@ if [[ "$UPDATE_RC" -eq 1 ]]; then
         echo "$RC" >> $HOME/.bashrc
     fi
 else
+    set +x
     echo "RC was not added"
     echo "$RC"
 fi
