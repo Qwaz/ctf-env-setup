@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ -z "${TMUX}" ]]; then
-  tmux new-session -s "pwntools" -d $@
+  cmd.exe /c "wt.exe" -w 0 nt -d "//wsl$/Ubuntu/$PWD" wsl.exe /usr/bin/zsh -c "source $HOME/.zshrc && $@"
 else
   tmux split-window -h $@
 fi
