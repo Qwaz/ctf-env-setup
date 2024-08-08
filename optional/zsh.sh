@@ -1,15 +1,17 @@
 $INSTALL zsh
 
-ANTIBODY_DEB_NAME=antibody_${ANTIBODY_VERSION}_linux_amd64.deb
-wget https://github.com/getantibody/antibody/releases/download/v${ANTIBODY_VERSION}/${ANTIBODY_DEB_NAME}
-$SUDO dpkg -i $ANTIBODY_DEB_NAME
-rm $ANTIBODY_DEB_NAME
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cp .zsh_plugins $HOME
+# Install pure theme
+mkdir -p "$HOME/.zsh"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 
-str='source <(antibody init)
-antibody bundle < ~/.zsh_plugins
-zstyle ":completion:*" menu select
+str='zstyle ":completion:*" menu select
+
+ZSH_THEME=""
+
+fpath+=($HOME/.zsh/pure)
 '
 RC="$RC
 $str"

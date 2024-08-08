@@ -15,7 +15,6 @@ export TERM="xterm-256color"
 ulimit -c unlimited
 '
 
-source versions.sh
 source options.sh
 mkdir -p $LOCAL_BIN
 
