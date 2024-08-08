@@ -13,7 +13,8 @@ cd ctf-env-setup
 
 ## Included
 
-- Python venv setup with [pwntools](https://github.com/Gallopsled/pwntools)
+- Pyenv installation
+- Git aliases
 
 ### Optional Features
 
