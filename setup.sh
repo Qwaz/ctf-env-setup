@@ -46,7 +46,10 @@ test "$RUST" -eq 1 && source optional/rust.sh
 test "$TMUX" -eq 1 && source optional/tmux.sh
 
 # Update RC
-str='export PYENV_ROOT="$HOME/.pyenv"
+str='alias ga="git add -A"
+alias gm="git commit -m"
+
+export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 '
