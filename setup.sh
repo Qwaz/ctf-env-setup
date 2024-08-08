@@ -21,14 +21,14 @@ mkdir -p $LOCAL_BIN
 
 
 # add 32-bit support
-$SUDO dpkg --add-architecture i386
+test "$ARCH_32" -eq 1 && $SUDO dpkg --add-architecture i386
 
 
 # install packages
 $SUDO apt -yq update && $SUDO apt -yq upgrade
 $INSTALL git wget unzip curl
 $INSTALL build-essential libc6-dbg
-$INSTALL libc6-dbg:i386
+test "$ARCH_32" -eq 1 && $INSTALL libc6-dbg:i386
 
 
 # copy scripts

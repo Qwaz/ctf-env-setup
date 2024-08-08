@@ -18,6 +18,7 @@ cd ctf-env-setup
 
 ### Optional Features
 
+- libc 32-bit architecture support
 - [pwndbg](https://github.com/pwndbg/pwndbg)
 - [qemu-user-static](https://wiki.debian.org/QemuUserEmulation) for multi-arch support
 - zsh with [pure theme](https://github.com/sindresorhus/pure)
