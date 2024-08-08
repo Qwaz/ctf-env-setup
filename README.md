@@ -1,6 +1,6 @@
 # CTF Environment Setup
 
-CTF enviroment setup script for Ubuntu
+CTF environment setup script for Ubuntu
 
 ## Installation
 
