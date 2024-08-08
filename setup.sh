@@ -31,33 +31,8 @@ $INSTALL build-essential python3-dev python3-venv libc6-dbg
 $INSTALL libc6-dbg:i386
 
 
-if [ $KERNEL_OPT -eq 1 ]; then
-    # kernel related setting
-    SYSCTL_CONF=/etc/sysctl.conf
-    PTRACE_CONF=/etc/sysctl.d/10-ptrace.conf
-
-    echo 0 | $SUDO tee /proc/sys/kernel/yama/ptrace_scope
-    $SUDO sed -i '/^kernel.yama.ptrace_scope/ d' $PTRACE_CONF
-    echo 'kernel.yama.ptrace_scope = 0' | $SUDO tee -a $PTRACE_CONF
-
-    echo "core-%e.%p" | $SUDO tee /proc/sys/kernel/core_pattern
-    $SUDO sed -i '/^kernel.core_pattern/ d' $SYSCTL_CONF
-    echo 'kernel.core_pattern = core-%e.%p' | $SUDO tee -a $SYSCTL_CONF
-fi
-
-
 # copy scripts
 cp pwntools-terminal $LOCAL_BIN
-
-
-if [ $PWNDBG -eq 1 ]; then
-    # install pwndbg
-    git clone https://github.com/pwndbg/pwndbg $HOME/.pwndbg
-    pushd $PWD
-    cd $HOME/.pwndbg
-    ./setup.sh
-    popd
-fi
 
 
 # optional feature installation
