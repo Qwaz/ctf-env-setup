@@ -27,7 +27,7 @@ $SUDO dpkg --add-architecture i386
 # install packages
 $SUDO apt -yq update && $SUDO apt -yq upgrade
 $INSTALL git wget unzip curl
-$INSTALL build-essential python3-dev python3-venv libc6-dbg
+$INSTALL build-essential libc6-dbg
 $INSTALL libc6-dbg:i386
 
 
@@ -41,23 +41,6 @@ test "$QEMU" -eq 1 && source optional/qemu.sh
 test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$RUST" -eq 1 && source optional/rust.sh
 test "$TMUX" -eq 1 && source optional/tmux.sh
-
-
-# Python environment setup
-if [[ ! -d "$HOME/.venv" ]]; then
-    mkdir $HOME/.venv
-    python3 -m venv $HOME/.venv/hack
-
-    source $HOME/.venv/hack/bin/activate
-    pip install --upgrade pip
-    pip install pwntools pycryptodome
-    deactivate
-fi
-
-str='VIRTUAL_ENV_DISABLE_PROMPT=true source $HOME/.venv/hack/bin/activate
-'
-RC="$RC
-$str"
 
 # Update PATH variable
 RC="PATH=$RC_PATH:\$PATH
