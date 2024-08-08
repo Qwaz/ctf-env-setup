@@ -34,6 +34,9 @@ $INSTALL libc6-dbg:i386
 # copy scripts
 cp pwntools-terminal $LOCAL_BIN
 
+# Install pyenv
+curl https://pyenv.run | bash
+
 
 # optional feature installation
 test "$QEMU" -eq 1 && source optional/qemu.sh
@@ -42,10 +45,15 @@ test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$RUST" -eq 1 && source optional/rust.sh
 test "$TMUX" -eq 1 && source optional/tmux.sh
 
-# Update PATH variable
+# Update RC
+str='export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+'
 RC="PATH=$RC_PATH:\$PATH
 
-$RC"
+$RC
+$str"
 
 # Updating RC
 if [[ "$UPDATE_RC" -eq 1 ]]; then
