@@ -1,19 +1,25 @@
 $INSTALL zsh
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+mkdir -p "$HOME/.zsh"
 
-# Replace ZSH_THEME to ""
-sed -i 's/^ZSH_THEME=.*/ZSH_THEME=""/' $HOME/.zshrc
+# Install fish-like experiences
+git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-history-substring-search.git ~/.zsh/zsh-history-substring-search
 
 # Install pure theme
-mkdir -p "$HOME/.zsh"
 git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 
 str='zstyle ":completion:*" menu select
 
-ZSH_THEME=""
+# fish-like experiences
+fpath+=($HOME/.zsh/zsh-completions/src)
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# pure prompt theme
 fpath+=($HOME/.zsh/pure)
 
 autoload -U promptinit; promptinit
