@@ -48,6 +48,10 @@ test "$TMUX" -eq 1 && source optional/tmux.sh
 str='alias ga="git add -A"
 alias gm="git commit -m"
 
+if command -v code &> /dev/null; then
+    export GIT_EDITOR="code --wait"
+fi
+
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
