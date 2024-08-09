@@ -10,8 +10,7 @@ INSTALL="$SUDO apt -yq install"
 
 LOCAL_BIN="$HOME/.local/bin"
 RC_PATH="\$HOME/.local/bin"
-RC='export LC_CTYPE=en_US.UTF-8
-export TERM="xterm-256color"
+RC='export TERM="xterm-256color"
 ulimit -c unlimited
 '
 
