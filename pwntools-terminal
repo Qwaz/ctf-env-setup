@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ -z "${TMUX}" ]]; then
-  wt.exe -w 0 nt -d "//wsl.localhost/Ubuntu/$PWD" wsl.exe /usr/bin/zsh -c "source $HOME/.zshrc && $@"
+  wt.exe -w 0 nt -d "//wsl.localhost/Ubuntu/$PWD" wsl.exe "$@"
 else
   tmux split-window -h $@
 fi
