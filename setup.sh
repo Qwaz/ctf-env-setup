@@ -26,6 +26,8 @@ test "$ARCH_32" -eq 1 && $SUDO dpkg --add-architecture i386
 $SUDO apt -yq update && $SUDO apt -yq upgrade
 $INSTALL git wget unzip curl
 $INSTALL build-essential libc6-dbg
+# Python build dependencies
+$INSTALL libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 test "$ARCH_32" -eq 1 && $INSTALL libc6-dbg:i386
 
 
