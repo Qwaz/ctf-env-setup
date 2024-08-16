@@ -42,6 +42,7 @@ test "$QEMU" -eq 1 && source optional/qemu.sh
 test "$ZSH" -eq 1 && source optional/zsh.sh
 test "$RUST" -eq 1 && source optional/rust.sh
 test "$TMUX" -eq 1 && source optional/tmux.sh
+test "$PWNDBG" -eq 1 && source optional/pwndbg.sh
 
 # Update RC
 str='alias ga="git add -A"
