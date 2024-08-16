@@ -13,7 +13,7 @@ alias lal="eza -al"
 alias lla="eza -la"
 alias lr="eza -lT"
 
-alias cat="bat -p --paging=never"
+alias cat="bat -p -P"
 '
 RC="$RC
 $str"
