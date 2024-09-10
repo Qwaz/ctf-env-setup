@@ -11,7 +11,11 @@ git clone https://github.com/zsh-users/zsh-history-substring-search.git ~/.zsh/z
 # Install pure theme
 git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 
-str='zstyle ":completion:*" menu select
+str='bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^H" backward-kill-word
+
+zstyle ":completion:*" menu select
 
 # fish-like experiences
 fpath+=($HOME/.zsh/zsh-completions/src)
