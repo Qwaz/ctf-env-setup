@@ -24,5 +24,5 @@ cd ctf-env-setup
 - zsh with [pure theme](https://github.com/sindresorhus/pure)
 - [Rust](https://www.rust-lang.org/)
     - `cat` replacement with [`bat`](https://github.com/sharkdp/bat)
-    - `ls` replacement with [`exa`](https://github.com/ogham/exa)
+    - `ls` replacement with [`eza`](https://github.com/eza-community/eza)
 - [tmux](https://github.com/tmux/tmux) with [Dracula Theme](https://draculatheme.com/tmux)

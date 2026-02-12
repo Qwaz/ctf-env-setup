@@ -9,8 +9,6 @@ RC_PATH="${RC_PATH}:\$HOME/.cargo/bin"
 str='alias ls=eza
 alias la="eza -a"
 alias ll="eza -l"
-alias lal="eza -al"
-alias lla="eza -la"
 alias lr="eza -lT"
 
 alias cat="bat -p -P"

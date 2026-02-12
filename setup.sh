@@ -26,16 +26,11 @@ test "$ARCH_32" -eq 1 && $SUDO dpkg --add-architecture i386
 $SUDO apt -yq update && $SUDO apt -yq upgrade
 $INSTALL git wget unzip curl
 $INSTALL build-essential libc6-dbg
-# Python build dependencies
-$INSTALL libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 test "$ARCH_32" -eq 1 && $INSTALL libc6-dbg:i386
 
 
 # copy scripts
 cp pwntools-terminal $LOCAL_BIN
-
-# Install pyenv
-curl https://pyenv.run | bash
 
 
 # optional feature installation
@@ -48,15 +43,10 @@ test "$PWNDBG" -eq 1 && source optional/pwndbg.sh
 
 # Update RC
 str='alias ga="git add -A"
-alias gm="git commit -m"
 
 if command -v code &> /dev/null; then
     export GIT_EDITOR="code --wait"
 fi
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 '
 RC="PATH=$RC_PATH:\$PATH
 
