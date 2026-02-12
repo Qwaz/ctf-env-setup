@@ -43,6 +43,8 @@ test "$PWNDBG" -eq 1 && source optional/pwndbg.sh
 
 # Update RC
 str='alias ga="git add -A"
+alias gc="git commit"
+alias gf="git fetch"
 
 if command -v code &> /dev/null; then
     export GIT_EDITOR="code --wait"
