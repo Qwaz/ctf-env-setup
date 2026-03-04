@@ -17,6 +17,8 @@ bindkey "^H" backward-kill-word
 
 zstyle ":completion:*" menu select
 
+setopt INTERACTIVE_COMMENTS
+
 # fish-like experiences
 fpath+=($HOME/.zsh/zsh-completions/src)
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
