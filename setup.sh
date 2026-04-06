@@ -42,14 +42,18 @@ test "$TMUX" -eq 1 && source optional/tmux.sh
 test "$PWNDBG" -eq 1 && source optional/pwndbg.sh
 
 # Update RC
-str='alias ga="git add -A"
+str=$(cat <<'EOF'
+alias ga="git add -A"
 alias gc="git commit"
-alias gf="git fetch"
+alias gf="git fetch -p"
+alias gi='current_branch=$(git branch --show-current) && default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed
+"s|refs/remotes/origin/||") && git checkout $default_branch && git branch -D $current_branch'
 
 if command -v code &> /dev/null; then
     export GIT_EDITOR="code --wait"
 fi
-'
+EOF
+)
 RC="PATH=$RC_PATH:\$PATH
 
 $RC
